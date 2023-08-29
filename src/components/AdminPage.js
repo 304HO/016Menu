@@ -149,7 +149,7 @@ const AdminPage = ({ menus, onAddMenu, onDeleteMenu, onUpdateMenu }) => {
           </div>
         ))}
       </div>
-      <button onClick={() => history("/")}>Go to Home</button>
+      <button onClick={() => history("/016Menu")}>Go to Home</button>
     </div>
   );
 };
