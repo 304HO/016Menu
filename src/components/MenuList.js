@@ -6,7 +6,6 @@ const MenuList = ({ menus }) => {
 
   useEffect(() => {
     setFirstData(menus);
-    console.log(firstData);
   }, []);
 
   return (
