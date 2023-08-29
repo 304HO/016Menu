@@ -31,7 +31,7 @@ const App = () => {
         <Routes>
           <Route
             exact
-            path="/"
+            path="/016Menu"
             element={<MenuList menus={categorizedMenuData[menuType]} />}
           />
           <Route
