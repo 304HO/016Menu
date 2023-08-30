@@ -6,7 +6,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HeaderMenu from "./components/HeaderMenu";
 import styled from "styled-components";
-import menuListData from "./data/menuListData";
 import { db } from "./firebase-config";
 import { collection, doc, getDocs } from "firebase/firestore";
 
