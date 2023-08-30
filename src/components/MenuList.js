@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const MenuList = ({ menus }) => {
-  const [firstData, setFirstData] = useState([]);
-
-  useEffect(() => {
-    setFirstData(menus);
-  }, []);
-
   return (
     <MenuListContainer>
       {menus.map((menu) => (

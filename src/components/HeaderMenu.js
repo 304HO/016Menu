@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderMenu = ({ onMenuTypeChange }) => {
+  console.log(onMenuTypeChange);
+
   const handleMenuClick = (menuType) => {
     onMenuTypeChange(menuType);
   };

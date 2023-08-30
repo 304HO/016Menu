@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
 
 const AdminPage = ({ menus, onAddMenu, onDeleteMenu, onUpdateMenu }) => {
   const history = useNavigate();
@@ -44,18 +46,32 @@ const AdminPage = ({ menus, onAddMenu, onDeleteMenu, onUpdateMenu }) => {
     }
   };
 
-  const handleAddNewMenu = () => {
-    onAddMenu({
-      menuName: newMenuName,
-      price: newPrice,
-      description: newDescription,
-      photo: newPhoto,
-      category: selectedCategory,
-    });
-    setNewMenuName("");
-    setNewPrice("");
-    setNewDescription("");
-    setNewPhoto("");
+  const handleAddNewMenu = async () => {
+    // 모든 데이터를 입력해야 한다.
+    if (newMenuName && newPrice && newDescription && newPhoto) {
+      const newMenu = {
+        menuName: newMenuName,
+        price: newPrice,
+        description: newDescription,
+        photo: newPhoto,
+        category: selectedCategory,
+      };
+      try {
+        const docRef = await addDoc(collection(db, "menu"), newMenu);
+        onAddMenu({
+          ...newMenu,
+          id: docRef.id,
+        });
+        setNewMenuName("");
+        setNewPrice("");
+        setNewDescription("");
+        setNewPhoto("");
+
+        window.alert("Menu added successfully!");
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
+    }
   };
 
   const handleImageUpload = (e) => {

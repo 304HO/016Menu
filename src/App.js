@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MenuList from "./components/MenuList";
 import AdminPage from "./components/AdminPage";
@@ -7,27 +7,42 @@ import Footer from "./components/Footer";
 import HeaderMenu from "./components/HeaderMenu";
 import styled from "styled-components";
 import menuListData from "./data/menuListData";
+import { db } from "./firebase-config";
+import { collection, doc, getDocs } from "firebase/firestore";
 
 const App = () => {
-  const [menuData, setMenuData] = useState(menuListData);
+  const [menuData, setMenuData] = useState([]);
   const [menuType, setMenuType] = useState("menu");
 
   const handleMenuTypeChange = (newMenuType) => {
     setMenuType(newMenuType);
   };
+  // 추가된부분
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "menu"));
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setMenuData(data);
+    };
+    fetchData();
+  }, []);
+
+  console.log("menuData", menuData);
 
   const categorizedMenuData = {
     menu: menuData.filter((menu) => menu.category === "menu"),
     sideMenu: menuData.filter((menu) => menu.category === "sideMenu"),
     drinkMenu: menuData.filter((menu) => menu.category === "drinkMenu"),
   };
+  console.log("categorizedMenuData", categorizedMenuData);
 
   return (
     <Router>
       <ContentContainer>
         <BackgroundImage />
         <Header />
-        <HeaderMenu onMenuTypeChange={handleMenuTypeChange} />
+        <HeaderMenu onMenuTypeChange={handleMenuTypeChange} />{" "}
         <Routes>
           <Route
             exact
