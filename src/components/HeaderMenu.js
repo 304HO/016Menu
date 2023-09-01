@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderMenu = ({ onMenuTypeChange }) => {
-  console.log(onMenuTypeChange);
-
   const handleMenuClick = (menuType) => {
     onMenuTypeChange(menuType);
   };
@@ -26,11 +24,12 @@ export default HeaderMenu;
 const Container = styled.div`
   display: flex;
   justify-content: space-around;
-  gap: 20px;
+  gap: 30px;
 `;
 
 const StyledText = styled.span`
   font-size: 16px;
+  font-weight: 900;
   color: white;
   cursor: pointer;
 `;

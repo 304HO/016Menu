@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import HeaderMenu from "./components/HeaderMenu";
 import styled from "styled-components";
 import { db } from "./firebase-config";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 const App = () => {
   const [menuData, setMenuData] = useState([]);
@@ -20,7 +20,8 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "menu"));
+      const q = query(collection(db, "menu"), orderBy("menuName"));
+      const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map((doc) => doc.data());
       setMenuData(data);
     };
@@ -34,13 +35,13 @@ const App = () => {
     sideMenu: menuData.filter((menu) => menu.category === "sideMenu"),
     drinkMenu: menuData.filter((menu) => menu.category === "drinkMenu"),
   };
-  console.log("categorizedMenuData", categorizedMenuData);
 
   return (
     <Router>
       <ContentContainer>
         <BackgroundImage />
         <Header />
+        <Test />
         <HeaderMenu onMenuTypeChange={handleMenuTypeChange} />{" "}
         <Routes>
           <Route
@@ -96,6 +97,10 @@ const BackgroundImage = styled.div`
   background-image: url("https://304HO.github.io/016Menu/background.jpeg");
   background-size: cover;
   background-position: center;
-  filter: blur(5px);
+  filter: blur(5px) brightness(0.5);
   z-index: -1;
+`;
+
+const Test = styled.img`
+  background-image: url("https://304HO.github.io/016Menu/logo.PNG");
 `;

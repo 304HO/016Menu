@@ -20,7 +20,8 @@ export default MenuList;
 
 const MenuImage = styled.img`
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
+  height: auto;
   border-radius: 20px;
 `;
 

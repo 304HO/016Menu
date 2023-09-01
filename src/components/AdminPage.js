@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../firebase-config";
 
 const AdminPage = ({ menus, onAddMenu, onDeleteMenu, onUpdateMenu }) => {
   const history = useNavigate();
@@ -47,25 +48,36 @@ const AdminPage = ({ menus, onAddMenu, onDeleteMenu, onUpdateMenu }) => {
   };
 
   const handleAddNewMenu = async () => {
-    // 모든 데이터를 입력해야 한다.
-    if (newMenuName && newPrice && newDescription && newPhoto) {
-      const newMenu = {
-        menuName: newMenuName,
-        price: newPrice,
-        description: newDescription,
-        photo: newPhoto,
-        category: selectedCategory,
-      };
+    // 모든 데이터를 입력해야 합니다.
+    if (newMenuName && newPrice && newDescription && newPhotoFile) {
       try {
+        // 이미지를 Firebase Storage에 업로드
+        const imageRef = ref(storage, `menuImages/${newMenuName}`);
+        await uploadBytes(imageRef, newPhotoFile);
+
+        // 이미지의 다운로드 URL을 가져옴
+        const imageUrl = await getDownloadURL(imageRef);
+
+        // Firestore에 데이터 추가
+        const newMenu = {
+          menuName: newMenuName,
+          price: newPrice,
+          description: newDescription,
+          photo: imageUrl,
+          category: selectedCategory,
+        };
+
         const docRef = await addDoc(collection(db, "menu"), newMenu);
         onAddMenu({
           ...newMenu,
           id: docRef.id,
         });
+
         setNewMenuName("");
         setNewPrice("");
         setNewDescription("");
         setNewPhoto("");
+        setNewPhotoFile(null);
 
         window.alert("Menu added successfully!");
       } catch (error) {
@@ -80,7 +92,7 @@ const AdminPage = ({ menus, onAddMenu, onDeleteMenu, onUpdateMenu }) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         setNewPhotoFile(file);
-        setNewPhoto(e.target.result);
+        setNewPhoto(URL.createObjectURL(file)); // 파일 URL을 사용하여 이미지를 표시
       };
       reader.readAsDataURL(file);
     }
