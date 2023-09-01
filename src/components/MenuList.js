@@ -26,6 +26,7 @@ const MenuImage = styled.img`
 `;
 
 const MenuItem = styled.div`
+  width: 270px;
   color: white;
   background-color: rgba(59, 64, 77, 0.6);
   border: 10px solid transparent;

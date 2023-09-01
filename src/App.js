@@ -28,8 +28,6 @@ const App = () => {
     fetchData();
   }, []);
 
-  console.log("menuData", menuData);
-
   const categorizedMenuData = {
     menu: menuData.filter((menu) => menu.category === "menu"),
     sideMenu: menuData.filter((menu) => menu.category === "sideMenu"),
