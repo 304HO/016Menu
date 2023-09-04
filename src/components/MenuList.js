@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const MenuList = ({ menus }) => {
   // 쉼표를 사용하여 번호 형식 지정
-  function formatNumbeerWithCommas(number) {
+  function formatNumberWithCommas(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
@@ -14,7 +14,7 @@ const MenuList = ({ menus }) => {
           <MenuImage src={menu.photo} alt={menu.menuName} />
           <h3>{menu.menuName}</h3>
           <p>{menu.description}</p>
-          <p>가격: {formatNumbeerWithCommas(menu.price)}원</p>
+          <p>가격: {formatNumberWithCommas(menu.price)}원</p>
         </MenuItem>
       ))}
     </MenuListContainer>
