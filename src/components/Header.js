@@ -16,7 +16,7 @@ const HeaderContainer = styled.div`
   margin: 20px 0;
 `;
 
-const Title = styled.img`
+const Title = styled.div`
   width: 100%;
   height: 100px;
   background-image: url("https://304HO.github.io/016Menu/logo.PNG");
