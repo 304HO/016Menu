@@ -22,7 +22,7 @@ const Footer = () => {
       <CopyToClipboard text="267291613678534657" onCopy={handleCopy}>
         <DiscordIconBox>
           <FontAwesomeIcon icon={faDiscord} size="1x" />
-          {copied ? "Copied!" : "@304"}
+          {copied ? "ID 복사완료!" : "@304"}
         </DiscordIconBox>
       </CopyToClipboard>
     </FooterContainer>
