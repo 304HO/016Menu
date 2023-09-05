@@ -1,45 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const Footer = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    setCopied(true);
+    // 1초 후에 'copied' 상태를 초기화
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
+
   return (
     <FooterContainer>
-      <TextContainer>
-        돼지고기-국내산 쌀-국내산 배추김치(배추-국내산 고춧가루-국내산,중국산)
-        두부(콩-국내산)
-      </TextContainer>
-      <ButtonContainer to="/admin">
-        <Link to="/admin">관리자</Link>
-      </ButtonContainer>
+      Copyright 2023.&nbsp; <strong>304호 개발자 지망생</strong>. All rights
+      reserved.&nbsp;
+      <CopyToClipboard text="267291613678534657" onCopy={handleCopy}>
+        <DiscordIconBox>
+          <FontAwesomeIcon icon={faDiscord} size="1x" />
+          {copied ? "Copied!" : "@304"}
+        </DiscordIconBox>
+      </CopyToClipboard>
     </FooterContainer>
   );
 };
 
 export default Footer;
 
-const TextContainer = styled.text`
-  padding: 0 20px;
-  font-size: 10px;
-`;
-
 const FooterContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding: 20px 0;
+  color: white;
+  align-items: center;
 `;
 
-const ButtonContainer = styled.button`
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #3498db;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #2980b9;
-  }
+const DiscordIconBox = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;

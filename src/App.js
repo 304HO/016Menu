@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MenuList from "./components/MenuList";
 import AdminPage from "./components/AdminPage";
 import Header from "./components/Header";
+import BusinessInfo from "./components/BusinessInfo";
 import Footer from "./components/Footer";
 import HeaderMenu from "./components/HeaderMenu";
 import styled from "styled-components";
@@ -39,7 +40,7 @@ const App = () => {
       <ContentContainer>
         <BackgroundImage />
         <Header />
-        <Test />
+        <Logo />
         <HeaderMenu onMenuTypeChange={handleMenuTypeChange} />{" "}
         <Routes>
           <Route
@@ -69,6 +70,7 @@ const App = () => {
             }
           />
         </Routes>
+        <BusinessInfo />
         <Footer />
       </ContentContainer>
     </Router>
@@ -99,6 +101,6 @@ const BackgroundImage = styled.div`
   z-index: -1;
 `;
 
-const Test = styled.img`
+const Logo = styled.img`
   background-image: url("https://304HO.github.io/016Menu/logo.PNG");
 `;
