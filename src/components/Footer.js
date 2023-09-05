@@ -17,12 +17,12 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      Copyright 2023.&nbsp; <strong>304호 개발자 지망생</strong>. All rights
-      reserved.&nbsp;
+      Copyright 2023.&nbsp; <strong>304호 개발자 지망생.</strong>&nbsp; All
+      rights reserved.&nbsp;
       <CopyToClipboard text="267291613678534657" onCopy={handleCopy}>
         <DiscordIconBox>
           <FontAwesomeIcon icon={faDiscord} size="1x" />
-          {copied ? "ID 복사완료!" : "@304"}
+          {copied ? " ID 복사완료!" : " @304"}
         </DiscordIconBox>
       </CopyToClipboard>
     </FooterContainer>
@@ -37,6 +37,7 @@ const FooterContainer = styled.div`
   padding: 20px 0;
   color: white;
   align-items: center;
+  font-size: 12px;
 `;
 
 const DiscordIconBox = styled.div`

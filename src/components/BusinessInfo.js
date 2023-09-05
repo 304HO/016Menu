@@ -60,7 +60,8 @@ const ButtonContainer = styled.button`
 
 const BusinessInfoContent = styled.div`
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
+  color: white;
   text-align: start;
 `;
